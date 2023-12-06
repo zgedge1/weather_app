@@ -12,7 +12,7 @@ while True:
     try:
         api_key = 'df9f6adc7d89e0757fdee3c72ae7b5eb'
         
-        city = input("Search a city or type exit to quit  ")
+        city = input("Search a city or type exit to quit   ")
 
         if city.lower() == "exit":
             break
