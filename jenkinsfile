@@ -2,8 +2,9 @@ pipeline {
     agent any
 
     tools {
-        // Make sure "Python3" matches the tool name configured in Jenkins Global Tool Configuration
-        nodejs 'Python3'
+        // Use the correct tool type for Python
+        // "Python3" should match the tool name configured in Jenkins Global Tool Configuration
+        python 'Python3'
     }
 
     stages {
@@ -35,10 +36,11 @@ pipeline {
 
         // Other stages...
 
-        post {
-            always {
-                echo 'Post-build steps go here'
-            }
+    }
+
+    post {
+        always {
+            echo 'Post-build steps go here'
         }
     }
 }
