@@ -1,36 +1,26 @@
 pipeline {
     agent any
 
-    environment {
-        PYTHON_EXECUTABLE = 'python3'
-        VENV_DIR = 'venv'
+    tools {
+        // Make sure "Python3" matches the tool name configured in Jenkins Global Tool Configuration
+        nodejs 'Python3'
     }
 
     stages {
-        stage('Tool Installation') {
+        stage('Declarative: Checkout SCM') {
             steps {
-                script {
-                    // Use the configured Python tool
-                    def pythonTool = tool 'Python3'
-                    env.PATH = "${pythonTool}/bin:${env.PATH}"
-                }
+                checkout scm
             }
         }
 
         stage('Install Dependencies') {
             steps {
                 script {
+                    // Install python3-venv package
+                    sh 'apt-get update && apt-get install -y python3-venv'
+
                     // Create a virtual environment
-                    sh "${PYTHON_EXECUTABLE} -m venv ${VENV_DIR}"
-
-                    // Activate the virtual environment
-                    env.PATH = "${WORKSPACE}/${VENV_DIR}/bin:${env.PATH}"
-
-                    // Upgrade pip in the virtual environment
-                    sh "${PYTHON_EXECUTABLE} -m pip install --upgrade pip"
-
-                    // Install dependencies
-                    sh "${PYTHON_EXECUTABLE} -m pip install -r requirements.txt"
+                    sh 'python3 -m venv venv'
                 }
             }
         }
@@ -38,17 +28,17 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Run your Python script within the virtual environment
-                    sh "${PYTHON_EXECUTABLE} weather_app_no_gui.py"
+                    // Your test steps here
                 }
             }
         }
-    }
 
-    post {
-        always {
-            // Clean up or do any necessary post-build tasks
-            echo 'Post-build steps go here'
+        // Other stages...
+
+        post {
+            always {
+                echo 'Post-build steps go here'
+            }
         }
     }
 }
