@@ -7,6 +7,14 @@ pipeline {
     }
 
     stages {
+        stage('SCM') {
+            steps {
+                script {
+                    checkout scm
+                }
+            }
+        }
+
         stage('Tool Installation') {
             steps {
                 script {
@@ -40,6 +48,17 @@ pipeline {
                 script {
                     // Run your Python script within the virtual environment
                     sh "${PYTHON_EXECUTABLE} weather_app_no_gui.py"
+                }
+            }
+        }
+
+        stage('SonarQube Analysis') {
+            steps {
+                script {
+                    def scannerHome = tool 'SonarScanner'
+                    withSonarQubeEnv() {
+                        sh "${scannerHome}/bin/sonar-scanner"
+                    }
                 }
             }
         }
