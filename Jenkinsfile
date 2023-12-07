@@ -52,6 +52,15 @@ pipeline {
             }
         }
 
+        stage('User Input') {
+            steps {
+                script {
+                    // User input stage
+                    input message: 'Please confirm whether to proceed', ok: 'Proceed'
+                }
+            }
+        }
+
         stage('SonarQube Analysis') {
             steps {
                 script {
