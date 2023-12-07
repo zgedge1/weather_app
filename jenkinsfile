@@ -1,10 +1,9 @@
 pipeline {
     agent any
 
+    // Specify the Python tool directly
     tools {
-        // Use the correct tool type for Python
-        // "Python3" should match the tool name configured in Jenkins Global Tool Configuration
-        python 'Python3'
+        Python 'Python3'
     }
 
     stages {
