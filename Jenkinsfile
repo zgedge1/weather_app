@@ -4,7 +4,6 @@ pipeline {
     environment {
         PYTHON_EXECUTABLE = 'python3'
         VENV_DIR = 'venv'
-        CITY_TO_TEST = 'Baltimore'
     }
 
     stages {
@@ -47,8 +46,17 @@ pipeline {
         stage('Test') {
             steps {
                 script {
-                    // Run your Python script within the virtual environment with the specified city
-                    sh "${PYTHON_EXECUTABLE} weather_app_no_gui.py ${CITY_TO_TEST}"
+                    // Run your Python script within the virtual environment
+                    sh "${PYTHON_EXECUTABLE} weather_app_no_gui.py"
+                }
+            }
+        }
+
+        stage('User Input') {
+            steps {
+                script {
+                    // User input stage
+                    input message: 'Please confirm whether to proceed', ok: 'Proceed'
                 }
             }
         }
