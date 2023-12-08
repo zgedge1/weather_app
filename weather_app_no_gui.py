@@ -11,7 +11,7 @@ print()
 try:
     api_key = 'df9f6adc7d89e0757fdee3c72ae7b5eb'
     
-    city = "baltimore"
+    city = input("Enter a city ")
 
 
     url = f"https://api.openweathermap.org/data/2.5/weather?q={city}&appid={api_key}"
