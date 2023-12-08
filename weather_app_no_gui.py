@@ -16,7 +16,7 @@ while True:
 
     try:
 
-        city = input('Enter a city ')
+        city = input('Enter a city or type exit to quit ')
         if city.lower() == 'exit':
             exit(0)
 
@@ -66,3 +66,5 @@ while True:
 
     except Exception as e:
         print(f"ERROR: City not found ")
+
+    break
