@@ -15,7 +15,7 @@ import org.json.JSONObject;
 
 public class weatherApp {
 
-    private static String apiKey = "df9f6adc7d89e0757fdee3c72ae7b5eb";
+    private static String apiKey = // Enter API KEY
     private static String apiUrl = "https://api.openweathermap.org/data/2.5/weather";
 
     public static void main(String[] args) {
